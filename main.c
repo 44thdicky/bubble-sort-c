@@ -1,18 +1,31 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+void bubblesort(int array[], int laenge){
+     int i, j, tmp;
+    for(i=1;i<laenge;i++)
+    {
+        for (j=0;j<laenge-i;j++)
+        {
+            if(array[j]>array[j+1])
+            {
+                tmp=array[j];
+                array[j]=array[j+1];
+                array[j+1]=tmp;
+            }
+        }
+    }
+}
 
 int main ()
 {
    
     while(1){
     int iTipp[6]={0};
-    int i;
     float dzahlung;
     float fpreis=14.4;
     float fsumme=0.0;
-    int tmp;
-
+    int i;
     printf("\n++++++++++++++++++++++++++++\n");
     printf("\t\nLottoprogramm\n");
     printf("\n++++++++++++++++++++++++++++\n");
@@ -46,13 +59,7 @@ int main ()
         
         
         //under construction
-        for(i=0;)
-        {
-            for()
-            {
-                if()
-            }
-        }
+        bubblesort(iTipp, 6); 
 
         printf("\nDie getippten Zahlen lauten: \t%i\t %i\t %i\t %i\t %i\t %i\n", iTipp[0], iTipp[1], iTipp[2], iTipp[3], iTipp[4], iTipp[5]);
             //if(iTipp[i]==)
@@ -64,4 +71,3 @@ int main ()
     }
    
 }
-   
