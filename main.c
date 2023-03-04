@@ -62,11 +62,6 @@ int main ()
         bubblesort(iTipp, 6); 
 
         printf("\nDie getippten Zahlen lauten: \t%i\t %i\t %i\t %i\t %i\t %i\n", iTipp[0], iTipp[1], iTipp[2], iTipp[3], iTipp[4], iTipp[5]);
-            //if(iTipp[i]==)
-            //{
-
-            //}
-
         }
     }
    
