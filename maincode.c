@@ -19,19 +19,16 @@ void bubblesort(int array[], int laenge){
         }
     }
 }
-void dupilkat(int array[], int laenge)
+void gewinnerzahlen(int igewinnerzahlen[])
 {
-    int i;
-    int k;
-    int tmp;
-    
-    for (i=1;i<laenge;i++)
-    {
-        if(array[1]==array[k]){
-            tmp=array[i];
-            array[i]=array[k+1];
-            array[k+1]=array[i];
-
+    int i,j,k;
+    for(i=0;i<6;i++){
+        igewinnerzahlen[i]=rand()%49;
+        igewinnerzahlen[i]+=1;
+        for(j=0;j<i;j++){
+            if(igewinnerzahlen[i]==igewinnerzahlen[j]){
+                i--;               
+            }
         }
     }
 }
@@ -67,7 +64,11 @@ int main ()
                 printf("Bitte Zahlen von 1-49 tippen!\n");
                 abort();
             }
-            dupilkat(iTipp, 6);
+            for(j=0;j<i;j++){
+                if (iTipp[i]==iTipp[j]){
+                    i--;
+                }
+            }
             //else if(iTipp[i]==iTipp[k])
             //{
                 //printf("Duplikat entdeckt!");
@@ -82,19 +83,8 @@ int main ()
         }
         printf("\n-------------------------------------");
 
-        for(int i=0;i<6;i++){
-            do {
-                int is_duplicate=0;
-                igewinnerzahlen[i]=(rand()%49)+1;
-                for(j=0;j<i;j++){
-                    if(igewinnerzahlen[i]==igewinnerzahlen[j]){
-                        is_duplicate=1;
-                        break;
-                    }
-                } 
-            }
-            while (is_duplicate); 
-        }
+        gewinnerzahlen(igewinnerzahlen);
+
         for(i=0;i<6;i++){
             bubblesort(igewinnerzahlen, 6);
             printf("\nDie Gewinnerzahlen lauten: %d\n", igewinnerzahlen[i]);
