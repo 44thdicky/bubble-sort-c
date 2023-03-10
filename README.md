@@ -1,5 +1,5 @@
 # bubble-sort
 bubblesort in c
 
-if anyone has ever access to this repo: my code is never structured, sry
-//\\
+testing site for code that is being tested and not implemented in the original code 
+....
