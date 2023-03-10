@@ -17,9 +17,3 @@ void bubblesort(int array[], int length)
         }
     }
 }
-int main()
-{
-    int iTipp[6]={6,8,10,2,4,7};
-    bubblesort(iTipp, 6);
-    printf("%i %i %i %i %i %i", iTipp[0], iTipp[1], iTipp[2], iTipp[3], iTipp[4], iTipp[5]);
-}

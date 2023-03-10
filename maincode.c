@@ -27,7 +27,7 @@ void gewinnerzahlen(int igewinnerzahlen[])
         igewinnerzahlen[i]+=1;
         for(j=0;j<i;j++){
             if(igewinnerzahlen[i]==igewinnerzahlen[j]){
-                i--;
+                i--;               
             }
         }
     }
@@ -53,37 +53,6 @@ int main ()
     printf("\t\nLottoprogramm\n");
     printf("\n++++++++++++++++++++++++++++\n");
 
-    printf("Das Spielen unter 18 Jahren ist strengstens untersagt. Bei Glücksspielsucht unbedingt Hilfe aufsuchen unter: bzga.de/infotelefone/gluecksspielsucht\n");
-    printf("Altersüberprüfung:\n");
-    printf("Bitte geben Sie Ihr Geburtsdatum ein (tt.mm.yyyy)\n");
-    scanf("%i.%i.%i", &itag, &imonat, &ijahr);
- 
-    if(ijahr>2005){
-        printf("Sie sind zu jung, um Lotto spielen zu können\n");
-    }
-    else {
-        printf("Bitte zahlen Sie folgenden Betrag: %.2lf Euro\n", fpreis-fsumme);
-     fflush(stdin);
-     do 
-        {
-        printf("Noch zu zahlen: %.2f €\n", fpreis-fsumme);
-        scanf("%f", &dzahlung);
-            if(dzahlung==10||dzahlung==5||dzahlung==20)
-            {
-                fsumme+=dzahlung;
-            }
-            else
-            {
-                printf("Erlaubte Scheine: 5 Euro, 10 Euro, 20 Euro\n");
-            } 
-        } 
-        
-        while(fsumme<14.40);
-        if(fsumme>dzahlung)
-        {
-            printf("Wechselgeld betraegt: %.2f\n", fsumme-fpreis);
-        }
-        {
     printf("Geben Sie Ihren Tipp ein: \n");
 
         //under construction - hier soll der Duplikatentdecker rein
@@ -96,19 +65,24 @@ int main ()
                 abort();
             }
             for(j=0;j<i;j++){
-                if(iTipp[i]==iTipp[j]){
+                if (iTipp[i]==iTipp[j]){
                     i--;
                 }
             }
+            //else if(iTipp[i]==iTipp[k])
+            //{
+                //printf("Duplikat entdeckt!");
+                //i++;
+            //}
         } 
-        }
-     }
+        //// under construction //
         bubblesort(iTipp, 6);
         for(i=0; i<6;i++)
         {
             printf("\n Die getippten Zahlen lauten: %i\t", iTipp[i]);
         }
         printf("\n-------------------------------------");
+
         gewinnerzahlen(igewinnerzahlen);
 
         for(i=0;i<6;i++){
