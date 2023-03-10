@@ -1,6 +1,7 @@
+//EIN LOTTOSCHEIN
 #include <stdlib.h>
 #include <stdio.h>
-
+#include <QTKit.h>
 #define ARRAY_SIZE 6
 
 void bubblesort(int array[], int laenge){
@@ -14,24 +15,20 @@ void bubblesort(int array[], int laenge){
                 tmp=array[j];
                 array[j]=array[j+1];
                 array[j+1]=tmp;
-   
             }
         }
     }
 }
-void dupilkat(int array[], int laenge)
+void gewinnerzahlen(int igewinnerzahlen[])
 {
-    int i;
-    int k;
-    int tmp;
-    
-    for (i=1;i<laenge;i++)
-    {
-        if(array[1]==array[k]){
-            tmp=array[i];
-            array[i]=array[k+1];
-            array[k+1]=array[i];
-
+    int i,j;
+    for(i=0;i<6;i++){
+        igewinnerzahlen[i]=rand()%49;
+        igewinnerzahlen[i]+=1;
+        for(j=0;j<i;j++){
+            if(igewinnerzahlen[i]==igewinnerzahlen[j]){
+                i--;
+            }
         }
     }
 }
@@ -42,16 +39,15 @@ int main ()
     int iTipp[6]={0};
     int igewinnerzahlen[6]={0};
     float dzahlung;
-    float fpreis=14.4;
+    float fpreis=1.2;
     float fsumme=0.0;
     int i;
     int itag;
     int imonat;
     int ijahr;
-    //int num;
     int j;
-    int is_duplicate=0;
-    int k;
+    float fkontostand=0;
+    int iFelder;
 
     printf("\n++++++++++++++++++++++++++++\n");
     printf("\t\nLottoprogramm\n");
@@ -61,31 +57,34 @@ int main ()
     printf("Altersüberprüfung:\n");
     printf("Bitte geben Sie Ihr Geburtsdatum ein (tt.mm.yyyy)\n");
     scanf("%i.%i.%i", &itag, &imonat, &ijahr);
- 
+    
     if(ijahr>2005){
         printf("Sie sind zu jung, um Lotto spielen zu können\n");
     }
     else {
-        printf("Bitte zahlen Sie folgenden Betrag: %.2lf Euro\n", fpreis-fsumme);
-     fflush(stdin);
+        printf("Bitte zahlen Sie folgenden Betrag: %.2lf Euro\n", fpreis);
+        fflush(stdin);
      do 
         {
         printf("Noch zu zahlen: %.2f €\n", fpreis-fsumme);
         scanf("%f", &dzahlung);
-            if(dzahlung==10||dzahlung==5||dzahlung==20)
+            if(dzahlung==5||dzahlung==2||dzahlung==1)
             {
                 fsumme+=dzahlung;
             }
             else
             {
-                printf("Erlaubte Scheine: 5 Euro, 10 Euro, 20 Euro\n");
+                printf("Erlaubte: 1 Euro, 2 Euro, 5 Euro\n");
             } 
         } 
+        while(fsumme<1.2);
         
-        while(fsumme<14.40);
         if(fsumme>dzahlung)
         {
             printf("Wechselgeld betraegt: %.2f\n", fsumme-fpreis);
+            if(fsumme>dzahlung){
+                printf("Ihr Kontostand betraegt: %.2lf\n", fsumme-fpreis);
+            }
         }
         {
     printf("Geben Sie Ihren Tipp ein: \n");
@@ -94,41 +93,29 @@ int main ()
         for (i=0;i<6;i++){
             printf("Geben Sie ihre %i. Zahl ein:\n", i+1);
             scanf("%i", &iTipp[i]);
-            if(iTipp[i]>49&&iTipp[i]<1)
+            if(iTipp[i]>49||iTipp[i]<1)
             {
                 printf("Bitte Zahlen von 1-49 tippen!\n");
                 abort();
             }
-            dupilkat(iTipp, 6);
-            //else if(iTipp[i]==iTipp[k])
-            //{
-                //printf("Duplikat entdeckt!");
-                //i++;
-            //}
+            for(j=0;j<i;j++){
+                if(iTipp[i]==iTipp[j]){
+                    i--;
+                }
+            }
         } 
         }
      }
-        //// under construction //
         bubblesort(iTipp, 6);
         for(i=0; i<6;i++)
         {
             printf("\n Die getippten Zahlen lauten: %i\t", iTipp[i]);
         }
-        printf("\n-------------------------------------");
+        printf("\n---------------------------------------");
+        printf("\n||\n||\n||\n||\n||\n||\n||\n||\n||\n||\n");
+        printf("---------------------------------------");
+        gewinnerzahlen(igewinnerzahlen);
 
-        for(int i=0;i<6;i++){
-            do {
-                int is_duplicate=0;
-                igewinnerzahlen[i]=(rand()%49)+1;
-                for(j=0;j<i;j++){
-                    if(igewinnerzahlen[i]==igewinnerzahlen[j]){
-                        is_duplicate=1;
-                        break;
-                    }
-                } 
-            }
-            while (is_duplicate); 
-        }
         for(i=0;i<6;i++){
             bubblesort(igewinnerzahlen, 6);
             printf("\nDie Gewinnerzahlen lauten: %d\n", igewinnerzahlen[i]);
@@ -140,7 +127,5 @@ int main ()
             {
             printf("Das naechste Mal!\n");
             }    
-        
-      
     }
 }
