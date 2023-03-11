@@ -1,6 +1,6 @@
+//EIN LOTTOSCHEIN
 #include <stdlib.h>
 #include <stdio.h>
-
 #define ARRAY_SIZE 6
 
 void bubblesort(int array[], int laenge){
@@ -14,14 +14,13 @@ void bubblesort(int array[], int laenge){
                 tmp=array[j];
                 array[j]=array[j+1];
                 array[j+1]=tmp;
-   
             }
         }
     }
 }
 void gewinnerzahlen(int igewinnerzahlen[])
 {
-    int i,j,k;
+    int i,j;
     for(i=0;i<6;i++){
         igewinnerzahlen[i]=rand()%49;
         igewinnerzahlen[i]+=1;
@@ -32,22 +31,37 @@ void gewinnerzahlen(int igewinnerzahlen[])
         }
     }
 }
+void zufaelligeZahlen(int iZahlen[][6], int iTippAnzahl)
+{
+    int i,j,k;
+    for(k=0;k<iTippAnzahl;k++){
+        for(i=0;i<6;i++){
+            iZahlen[k][i]=rand()%49;
+            iZahlen[k][i]+=1;
+            for(j=0;j<i;j++){
+                if(iZahlen[k][i]==iZahlen[k][j]){
+                    i--;
+                }
+            }
+        }
+    }
+}
 int main ()
 {
     while(1){
     int iTipp[6]={0};
     int igewinnerzahlen[6]={0};
     float dzahlung;
-    float fpreis=14.4;
+    float fpreis=1.2;
     float fsumme=0.0;
     int i;
     int itag;
     int imonat;
     int ijahr;
-    //int num;
     int j;
-    int is_duplicate=0;
-    int k;
+    float fkontostand;
+    int itippanzahl;
+    float fgewinn[6]={0, 1000, 2000, 4000, 1000000, 15000000};
 
     printf("\n++++++++++++++++++++++++++++\n");
     printf("\t\nLottoprogramm\n");
@@ -57,31 +71,34 @@ int main ()
     printf("Altersüberprüfung:\n");
     printf("Bitte geben Sie Ihr Geburtsdatum ein (tt.mm.yyyy)\n");
     scanf("%i.%i.%i", &itag, &imonat, &ijahr);
- 
+    
     if(ijahr>2005){
         printf("Sie sind zu jung, um Lotto spielen zu können\n");
     }
     else {
-        printf("Bitte zahlen Sie folgenden Betrag: %.2lf Euro\n", fpreis-fsumme);
-     fflush(stdin);
+        printf("Bitte zahlen Sie folgenden Betrag: %.2lf Euro\n", fpreis);
+        fflush(stdin);
      do 
         {
         printf("Noch zu zahlen: %.2f €\n", fpreis-fsumme);
         scanf("%f", &dzahlung);
-            if(dzahlung==10||dzahlung==5||dzahlung==20)
+            if(dzahlung==5||dzahlung==2||dzahlung==1)
             {
                 fsumme+=dzahlung;
             }
             else
             {
-                printf("Erlaubte Scheine: 5 Euro, 10 Euro, 20 Euro\n");
+                printf("Erlaubt: 1 Euro, 2 Euro, 5 Euro\n");
             } 
         } 
+        while(fsumme<1.2);
         
-        while(fsumme<14.40);
         if(fsumme>dzahlung)
         {
             printf("Wechselgeld betraegt: %.2f\n", fsumme-fpreis);
+            if(fsumme>dzahlung){
+                printf("Ihr Kontostand betraegt: %.2lf\n", fsumme-fpreis);
+            }
         }
         {
     printf("Geben Sie Ihren Tipp ein: \n");
@@ -90,7 +107,7 @@ int main ()
         for (i=0;i<6;i++){
             printf("Geben Sie ihre %i. Zahl ein:\n", i+1);
             scanf("%i", &iTipp[i]);
-            if(iTipp[i]>49&&iTipp[i]<1)
+            if(iTipp[i]>49||iTipp[i]<1)
             {
                 printf("Bitte Zahlen von 1-49 tippen!\n");
                 abort();
@@ -108,7 +125,11 @@ int main ()
         {
             printf("\n Die getippten Zahlen lauten: %i\t", iTipp[i]);
         }
-        printf("\n-------------------------------------");
+        //under construction
+        //zufaelligeZahlen(iTipp, itippanzahl);
+        printf("\n---------------------------------------");
+        printf("\n||\n||\n||\n||\n||\n||\n||\n||\n||\n||\n");
+        printf("---------------------------------------");
         gewinnerzahlen(igewinnerzahlen);
 
         for(i=0;i<6;i++){
@@ -116,7 +137,9 @@ int main ()
             printf("\nDie Gewinnerzahlen lauten: %d\n", igewinnerzahlen[i]);
             }
             if(iTipp[i]==igewinnerzahlen[i]){
-            printf("Sie haben gewonnen! Der Preis betraegt 15.000.000 Euro!\n");
+                if(iTipp[0]==igewinnerzahlen[0]){
+                    printf("Ihr Gewinn betraegt: %.2lf", fgewinn[0]);
+                }
             }
             else
             {
