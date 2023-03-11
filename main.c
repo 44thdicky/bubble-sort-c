@@ -1,7 +1,6 @@
 //EIN LOTTOSCHEIN
 #include <stdlib.h>
 #include <stdio.h>
-#include <QTKit.h>
 #define ARRAY_SIZE 6
 
 void bubblesort(int array[], int laenge){
@@ -32,7 +31,21 @@ void gewinnerzahlen(int igewinnerzahlen[])
         }
     }
 }
-
+void zufaelligeZahlen(int iZahlen[][6], int iTippAnzahl)
+{
+    int i,j,k;
+    for(k=0;k<iTippAnzahl;k++){
+        for(i=0;i<6;i++){
+            iZahlen[k][i]=rand()%49;
+            iZahlen[k][i]+=1;
+            for(j=0;j<i;j++){
+                if(iZahlen[k][i]==iZahlen[k][j]){
+                    i--;
+                }
+            }
+        }
+    }
+}
 int main ()
 {
     while(1){
@@ -46,8 +59,9 @@ int main ()
     int imonat;
     int ijahr;
     int j;
-    float fkontostand=0;
-    int iFelder;
+    float fkontostand;
+    int itippanzahl;
+    float fgewinn[6]={0, 1000, 2000, 4000, 1000000, 15000000};
 
     printf("\n++++++++++++++++++++++++++++\n");
     printf("\t\nLottoprogramm\n");
@@ -74,7 +88,7 @@ int main ()
             }
             else
             {
-                printf("Erlaubte: 1 Euro, 2 Euro, 5 Euro\n");
+                printf("Erlaubt: 1 Euro, 2 Euro, 5 Euro\n");
             } 
         } 
         while(fsumme<1.2);
@@ -111,6 +125,8 @@ int main ()
         {
             printf("\n Die getippten Zahlen lauten: %i\t", iTipp[i]);
         }
+        //under construction
+        //zufaelligeZahlen(iTipp, itippanzahl);
         printf("\n---------------------------------------");
         printf("\n||\n||\n||\n||\n||\n||\n||\n||\n||\n||\n");
         printf("---------------------------------------");
@@ -121,7 +137,9 @@ int main ()
             printf("\nDie Gewinnerzahlen lauten: %d\n", igewinnerzahlen[i]);
             }
             if(iTipp[i]==igewinnerzahlen[i]){
-            printf("Sie haben gewonnen! Der Preis betraegt 15.000.000 Euro!\n");
+                if(iTipp[0]==igewinnerzahlen[0]){
+                    printf("Ihr Gewinn betraegt: %.2lf", fgewinn[0]);
+                }
             }
             else
             {
