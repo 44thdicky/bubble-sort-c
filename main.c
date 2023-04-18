@@ -59,8 +59,8 @@ int main ()
     int imonat;
     int ijahr;
     int j;
-    float fkontostand;
-    int itippanzahl;
+    //float fkontostand;
+    //int itippanzahl;
     float fgewinn[6]={0, 1000, 2000, 4000, 1000000, 15000000};
 
     printf("\n++++++++++++++++++++++++++++\n");
