@@ -1,8 +1,9 @@
 //EIN LOTTOSCHEIN
 #include <stdlib.h>
 #include <stdio.h>
+#include <time.h>   
 #define ARRAY_SIZE 6
-
+#define size 6
 void bubblesort(int array[], int laenge){
      int i, j, tmp;
     for(i=1;i<laenge;i++)
@@ -21,7 +22,9 @@ void bubblesort(int array[], int laenge){
 void gewinnerzahlen(int igewinnerzahlen[])
 {
     int i,j;
-    for(i=0;i<6;i++){
+    time_t t;
+    srand(time(NULL));
+    for(i=0;i<size;i++){
         igewinnerzahlen[i]=rand()%49;
         igewinnerzahlen[i]+=1;
         for(j=0;j<i;j++){
@@ -34,7 +37,7 @@ void gewinnerzahlen(int igewinnerzahlen[])
 void zufaelligeZahlen(int iZahlen[][6], int iTippAnzahl)
 {
     int i,j,k;
-    for(k=0;k<iTippAnzahl;k++){
+    for(k=0;k<iTippAnzahl;k++){ 
         for(i=0;i<6;i++){
             iZahlen[k][i]=rand()%49;
             iZahlen[k][i]+=1;
@@ -42,6 +45,24 @@ void zufaelligeZahlen(int iZahlen[][6], int iTippAnzahl)
                 if(iZahlen[k][i]==iZahlen[k][j]){
                     i--;
                 }
+            }
+        }
+    }
+}
+void gewinnvergleich(){
+    int i;
+    int iTipp[6]={};
+    int igewinnerzahlen[6]={};
+
+    for (i=1;i<6;i++){
+        for (i=0;i<5;i++){
+            if (igewinnerzahlen[0]==iTipp[0])
+            {
+                printf("Eine richtig getippte Zahl!");
+            }
+            else if(igewinnerzahlen[1]==iTipp[1]) 
+            {
+                printf("Eine richtig getippte Zahl!");
             }
         }
     }
@@ -59,8 +80,6 @@ int main ()
     int imonat;
     int ijahr;
     int j;
-    float fkontostand;
-    int itippanzahl;
     float fgewinn[6]={0, 1000, 2000, 4000, 1000000, 15000000};
 
     printf("\n++++++++++++++++++++++++++++\n");
@@ -125,25 +144,11 @@ int main ()
         {
             printf("\n Die getippten Zahlen lauten: %i\t", iTipp[i]);
         }
-        //under construction
-        //zufaelligeZahlen(iTipp, itippanzahl);
-        printf("\n---------------------------------------");
-        printf("\n||\n||\n||\n||\n||\n||\n||\n||\n||\n||\n");
-        printf("---------------------------------------");
         gewinnerzahlen(igewinnerzahlen);
-
         for(i=0;i<6;i++){
             bubblesort(igewinnerzahlen, 6);
             printf("\nDie Gewinnerzahlen lauten: %d\n", igewinnerzahlen[i]);
             }
-            if(iTipp[i]==igewinnerzahlen[i]){
-                if(iTipp[0]==igewinnerzahlen[0]){
-                    printf("Ihr Gewinn betraegt: %.2lf", fgewinn[0]);
-                }
-            }
-            else
-            {
-            printf("Das naechste Mal!\n");
-            }    
+        gewinnvergleich();
     }
 }
