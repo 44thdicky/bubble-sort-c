@@ -37,13 +37,7 @@ int main ()
     while(1){
     int iTipp[6]={0};
     int igewinnerzahlen[6]={0};
-    float dzahlung;
-    float fpreis=14.4;
-    float fsumme=0.0;
     int i;
-    int itag;
-    int imonat;
-    int ijahr;
     //int num;
     int j;
     int is_duplicate=0;

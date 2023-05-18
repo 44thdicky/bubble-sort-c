@@ -4,6 +4,7 @@
 #include <time.h>   
 #define ARRAY_SIZE 6
 #define size 6
+
 void bubblesort(int array[], int laenge){
      int i, j, tmp;
     for(i=1;i<laenge;i++)
@@ -25,8 +26,7 @@ void gewinnerzahlen(int igewinnerzahlen[])
     time_t t;
     srand(time(NULL));
     for(i=0;i<size;i++){
-        igewinnerzahlen[i]=rand()%49;
-        igewinnerzahlen[i]+=1;
+        igewinnerzahlen[i]=rand()%49+1;
         for(j=0;j<i;j++){
             if(igewinnerzahlen[i]==igewinnerzahlen[j]){
                 i--;
@@ -50,22 +50,22 @@ void zufaelligeZahlen(int iZahlen[][6], int iTippAnzahl)
     }
 }
 void gewinnvergleich(){
-    int i;
-    int iTipp[6]={};
-    int igewinnerzahlen[6]={};
-
-    for (i=1;i<6;i++){
-        for (i=0;i<5;i++){
-            if (igewinnerzahlen[0]==iTipp[0])
-            {
-                printf("Eine richtig getippte Zahl!");
+    int i,j;
+    int igewinnerzahlen[6];
+    int iTipp[6];
+    for (int i=0;i<6;i++){
+        if (igewinnerzahlen[i]==iTipp[j]){
+            int found = 1;
+            break;
+            if (found){
+                printf("Die Zahl wurde richtig getippt!");
             }
-            else if(igewinnerzahlen[1]==iTipp[1]) 
-            {
-                printf("Eine richtig getippte Zahl!");
+            else {
+                printf("Leider ist keine getippte Zahl richtig getippt!");
             }
         }
     }
+
 }
 int main ()
 {
@@ -80,7 +80,7 @@ int main ()
     int imonat;
     int ijahr;
     int j;
-    float fgewinn[6]={0, 1000, 2000, 4000, 1000000, 15000000};
+    //float fgewinn[6]={0, 1000, 2000, 4000, 1000000, 15000000};
 
     printf("\n++++++++++++++++++++++++++++\n");
     printf("\t\nLottoprogramm\n");
